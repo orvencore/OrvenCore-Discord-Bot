@@ -7,4 +7,3 @@ class Project:
     slug: str
     status: str
     role: str
-    

@@ -1,8 +1,13 @@
 import discord
 from discord.ext import commands
 
+from bot.api.client import OrvenCoreAPI
 from bot.config import settings
 from bot.logger import logger
+from bot.services.auth_service import AuthService
+from bot.services.deployment_service import DeploymentService
+from bot.services.health_service import HealthService
+from bot.services.project_service import ProjectService
 
 
 class OrvenCoreBot(commands.Bot):
@@ -14,10 +19,20 @@ class OrvenCoreBot(commands.Bot):
             intents=intents,
         )
 
+        self.api = OrvenCoreAPI()
+        self.auth_service = AuthService(self.api)
+        self.project_service = ProjectService(self.api)
+        self.deployment_service = DeploymentService(self.api)
+        self.health_service = HealthService(self.api)
+        self.started_at = discord.utils.utcnow()
+
     async def setup_hook(self):
         extensions = [
             "bot.cogs.core",
             "bot.cogs.account",
+            "bot.cogs.projects",
+            "bot.cogs.deployments",
+            "bot.cogs.services",
         ]
 
         for extension in extensions:
