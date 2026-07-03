@@ -7,9 +7,11 @@ ERROR = 0xED4245
 # ASSETS
 ORVEN_LOGO = "https://assets.orvencore.com/static/img/logos/logo.png"
 
+from bot.config import settings
+
 # API / DEPENDENCIES
-API_TARGET = "https://api.orvencore.com"
-AUTH_TARGET = "https://auth.orvencore.com"
+API_TARGET = settings.ORVENCORE_API_URL.rstrip("/")
+AUTH_TARGET = settings.ORVENCORE_AUTH_URL.rstrip("/")
 API_CHECK = f"{API_TARGET}/api/health"
 
 # WEBSITE LINKS
@@ -18,10 +20,10 @@ HTTPS = "https://"
 HTTP = "http://"
 
 HOMEPAGE = f"{HTTPS}www.{BASE_DOMAIN}"
-AUTH = f"{HTTPS}auth.{BASE_DOMAIN}/#"
+AUTH = AUTH_TARGET
 
 BASE_LINKS = f"{HTTPS}links.{BASE_DOMAIN}"
-DISCORD_LINK = f"{BASE_LINKS}/discord"
+DISCORD_LINK = AUTH_TARGET
 SOCIAL_IG = f"{BASE_LINKS}/instagram"
 SOCIAL_X = f"{BASE_LINKS}/twitter-x"
 SOCIAL_YT = f"{BASE_LINKS}/youtube"

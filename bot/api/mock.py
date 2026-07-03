@@ -6,11 +6,14 @@ from bot.models.user import User
 
 def mock_user_for_discord_id(discord_id: int) -> User:
     return User(
-        id=1,
+        id="mock-user",
         username="karlo",
         discord_id=discord_id,
         plan="Founder",
         linked=True,
+        display_name="Karlo",
+        roles=("Owner",),
+        permissions=("auth.me", "discord.link", "admin.users", "admin.discord"),
     )
 
 
